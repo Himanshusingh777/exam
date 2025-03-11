@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ heading }}</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2.5rem;
+            color: #4CAF50;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-top: 30px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        td a {
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        td a:hover {
+            color: #0b79c0;
+        }
+
+        /* Hover effect for table rows */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .no-files {
+            color: #f44336;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .branch-container {
+            margin-bottom: 40px;
+        }
+
+        .semester-container {
+            margin-top: 20px;
+        }
+
+        /* Add some spacing around the page */
+        .content-container {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-container">
+        <h1>{{ heading }}</h1>
+
+        {% for branch, semesters in images.items() %}
+        <div class="branch-container">
+            <h2>{{ branch.upper() }}</h2>
+            {% for semester, files in semesters.items() %}
+            <div class="semester-container">
+                <h3>Semester {{ semester }}</h3>
+                
+                {% if files %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file_url in files %}
+                        <tr>
+                            <td>{{ file_url.split('/')[-1] }}</td>
+                            <td><a href="{{ file_url }}" target="_blank">View File</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="no-files">No files available for this semester.</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

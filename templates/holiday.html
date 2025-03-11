@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Page</title>
+    <style>
+        /* Reset some basic styles for a clean slate */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and general styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Main container styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Header section */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        /* Content section */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Image styling */
+        .holiday-img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        /* Description text */
+        .holiday-description {
+            font-size: 1.2rem;
+            color: #555;
+            text-align: center;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            font-size: 1rem;
+            color: #888;
+            margin-top: 40px;
+        }
+
+        /* Media Query for Mobile responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .holiday-description {
+                font-size: 1rem;
+            }
+
+            .holiday-img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>List of Holidays for 2025</h1>
+        </header>
+        
+        <div class="content">
+            <img src="{{ url_for('static', filename='images/holiday_image.jpg') }}" alt="Holiday Image" class="holiday-img" onclick="showHolidayAlert()">
+            <p class="holiday-description">Here is the list of holidays for the year 2025. Please make sure to check for any updates!</p>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 University Name. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript function to display an alert when the image is clicked
+        function showHolidayAlert() {
+            alert("Happy Holidays! Make sure to check the full list.");
+        }
+    </script>
+</body>
+</html>

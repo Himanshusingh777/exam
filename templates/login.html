@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General styles for the body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333; /* Dark background */
+            color: white; /* Contrast text */
+        }
+
+        /* Main container for card layout */
+        .card {
+            display: flex;
+            flex-direction: row;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+        }
+
+        /* Left side with image */
+        .card-image {
+            flex: 1;
+            position: relative;
+            background: url('{{ url_for('static', filename='Images/sign.jpeg') }}') center/cover no-repeat;
+        }
+
+        /* Welcome message overlay */
+        .card-image .welcome-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            color: white;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Right side with login form */
+        .card-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .flash-message {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Left side: Image -->
+        <div class="card-image">
+            {% if welcome_message %}
+                <!-- Welcome message overlay on image -->
+                <div class="welcome-overlay">
+                    <p>{{ welcome_message }}</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Right side: Login form -->
+        <div class="card-content">
+            {% if not welcome_message %}
+                <!-- Display the login form -->
+                <h1>Login</h1>
+                <form action="/login" method="POST">
+                    <label for="username">Username:</label>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        id="username" 
+                        placeholder="Enter your username" 
+                        required 
+                        autocomplete="username">
+
+                    <label for="password">Password:</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        placeholder="Enter your password" 
+                        required 
+                        autocomplete="current-password">
+
+                    <label for="role">Role:</label>
+                    <select name="role" id="role" required>
+                        <option value="admin">Admin</option>
+                        <option value="student">Student</option>
+                    </select>
+
+                    <button type="submit">Login</button>
+                </form>
+            {% endif %}
+
+            <!-- Display flash messages if any -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-message">
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <script>
+        {% if welcome_message %}
+            // Wait for 2 seconds before redirecting to the correct dashboard
+            setTimeout(function() {
+                var role = "{{ session['role'] }}";  // Get the role from the session
+                if (role === 'admin') {
+                    window.location.href = "/admin";  // Admin dashboard URL
+                } else if (role === 'student') {
+                    window.location.href = "/student";  // Student dashboard URL
+                }
+            }, 2000);
+        {% endif %}
+    </script>
+</body>
+</html>

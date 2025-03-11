@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Section</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffffff, #5d83e9);
+            color: #333;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Vertical Dashboard Styling */
+        #dashboard {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background: #1e90ff;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        #dashboard img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 2px solid #fff;
+        }
+
+        #dashboard h2 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        #dashboard ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        #dashboard ul li {
+            width: 80%;
+            padding: 15px;
+            text-align: center;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #4682b4;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #dashboard ul li:hover {
+            background: #5f9ea0;
+            transform: scale(1.05);
+        }
+
+        #dashboard ul li i {
+            font-size: 1.2em;
+        }
+
+        /* Main Content Styling */
+        main {
+            margin-left: 270px;
+            padding: 20px;
+            width: calc(100% - 270px);
+            box-sizing: border-box;
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            color: #fff;
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+            color: #fff;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Form Styling */
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 1000px;
+            animation: slideUp 1.5s ease-in-out;
+        }
+
+        form label {
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        form input:focus {
+            border-color: #ff7e5f;
+            outline: none;
+        }
+
+        form button {
+            background-color: rgb(46, 118, 199);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+        }
+
+        form button:hover {
+            background-color: rgb(17, 53, 235);
+            transform: scale(1.05);
+        }
+
+        /* Results Section */
+        .results {
+            margin-top: 30px;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background: #4682b4;
+            color: #fff;
+        }
+
+        table tr:hover {
+            background: #f1f1f1;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            form {
+                width: 90%;
+            }
+
+            #dashboard {
+                width: 200px;
+            }
+
+            main {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboard">
+        <img src="/static/Images/student.jpeg" alt="Student Logo">
+        <h2>Welcome, Student</h2>
+        <ul>
+            <li><i>📚</i> Courses</li>
+            <li><i>🏫</i> Branches</li>
+            <li><i>📑</i> Paper Types</li>
+            <li><i>📅</i> Years</li>
+            <li><i>🔓</i> Logout</li>
+        </ul>
+    </div>
+    <main>
+        <h1>Search Papers</h1>
+        <form method="POST">
+            <label for="course">Course:</label>
+            <input type="text" name="course" id="course" placeholder="Enter course">
+
+            <label for="branch">Branch:</label>
+            <input type="text" name="branch" id="branch" placeholder="Enter branch">
+
+            <label for="year">Year:</label>
+            <input type="text" name="year" id="year" placeholder="Enter year">
+
+            <label for="semester">Semester:</label>
+            <input type="text" name="semester" id="semester" placeholder="Enter semester">
+
+            <label for="paper_type">Paper Type:</label>
+            <input type="text" name="paper_type" id="paper_type" placeholder="Enter paper type">
+
+            <button type="submit">Search</button>
+        </form>
+
+        <div class="results">
+            <h2>Results:</h2>
+            {% if papers %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Branch</th>
+                            <th>Year</th>
+                            <th>Semester</th>
+                            <th>Subject</th>
+                            <th>Paper Type</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paper in papers %}
+                            <tr>
+                                <td>{{ paper['course'] }}</td>
+                                <td>{{ paper['branch'] }}</td>
+                                <td>{{ paper['year'] }}</td>
+                                <td>{{ paper['semester'] }}</td>
+                                <td>{{ paper['subject'] }}</td>
+                                <td>{{ paper['paper_type'] }}</td>
+                                <td><a href="{{ url_for('static', filename='uploads/' + paper['filename']) }}" download>Download Paper</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No papers found based on the search criteria.</p>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
