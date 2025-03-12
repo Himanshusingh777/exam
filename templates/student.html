@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Section</title>
+    <title>Academic Resources Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2c3e50;
+            --primary-dark: #1a2530;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --light: #f5f5f5;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --gray-light: #ecf0f1;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            --transition: all 0.25s ease;
+        }
+
         /* General Styling */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffffff, #5d83e9);
-            color: #333;
+            background: #f9f9f9;
+            color: var(--dark);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -23,29 +37,38 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 250px;
+            width: 280px;
             height: 100%;
-            background: #1e90ff;
-            color: #fff;
+            background: var(--primary-dark);
+            color: var(--light);
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-            animation: slideIn 1.5s ease-in-out;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
         }
 
         #dashboard img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            margin-bottom: 10px;
-            border: 2px solid #fff;
+            margin-bottom: 15px;
+            border: 2px solid var(--light);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.4s ease;
+        }
+
+        #dashboard img:hover {
+            transform: scale(1.03);
         }
 
         #dashboard h2 {
-            margin: 10px 0;
-            font-size: 1.5em;
+            margin: 10px 0 30px;
+            font-size: 1.4em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         #dashboard ul {
@@ -55,134 +78,211 @@
         }
 
         #dashboard ul li {
-            width: 80%;
-            padding: 15px;
-            text-align: center;
-            margin: 10px 0;
-            border-radius: 5px;
-            background: #4682b4;
+            width: 90%;
+            padding: 14px;
+            text-align: left;
+            margin: 8px auto;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
+            transition: var(--transition);
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        #dashboard ul li:hover {
-            background: #5f9ea0;
-            transform: scale(1.05);
+            gap: 15px;
         }
 
         #dashboard ul li i {
             font-size: 1.2em;
+            width: 24px;
+            text-align: center;
+        }
+
+        #dashboard ul li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(3px);
         }
 
         /* Main Content Styling */
         main {
-            margin-left: 270px;
-            padding: 20px;
-            width: calc(100% - 270px);
+            margin-left: 280px;
+            padding: 30px;
+            width: calc(100% - 280px);
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Header Styling */
         h1 {
-            font-size: 2.5em;
-            margin: 20px 0;
-            color: #fff;
-            animation: fadeInDown 1.5s ease-in-out;
+            font-size: 2.2em;
+            margin: 15px 0 30px;
+            color: var(--primary-dark);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
         h2 {
             font-size: 1.8em;
-            margin-top: 30px;
-            color: #fff;
-            animation: fadeIn 1.5s ease-in-out;
+            margin-top: 40px;
+            color: var(--primary-dark);
+            font-weight: 500;
         }
 
         /* Form Styling */
         form {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 80%;
+            background: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            width: 85%;
             max-width: 1000px;
-            animation: slideUp 1.5s ease-in-out;
+            transition: var(--transition);
+            margin-bottom: 30px;
+        }
+
+        form:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
 
         form label {
-            font-size: 1.1em;
+            font-size: 1em;
             display: block;
-            margin-bottom: 5px;
-            color: #333;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+            text-align: left;
         }
 
-        form input {
+        select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 2px solid #ccc;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1em;
-            transition: border-color 0.3s ease-in-out;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
         }
 
-        form input:focus {
-            border-color: #ff7e5f;
+        select:focus {
+            border-color: var(--accent);
             outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        select:hover {
+            border-color: var(--accent);
         }
 
         form button {
-            background-color: rgb(46, 118, 199);
-            color: #fff;
+            background: var(--accent);
+            color: var(--light);
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 5px;
-            font-size: 1.1em;
+            font-size: 1em;
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
         }
 
         form button:hover {
-            background-color: rgb(17, 53, 235);
-            transform: scale(1.05);
+            background: #2980b9;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        form button:active {
+            transform: translateY(1px);
         }
 
         /* Results Section */
         .results {
-            margin-top: 30px;
-            width: 100%;
-            overflow-x: auto;
+            margin-top: 20px;
+            width: 90%;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
-            background: #fff;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
 
         table th, table td {
-            padding: 10px;
-            border: 1px solid #ddd;
+            padding: 14px;
             text-align: left;
         }
 
         table th {
-            background: #4682b4;
-            color: #fff;
+            background: var(--primary);
+            color: var(--light);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        table tr {
+            transition: var(--transition);
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
         }
 
         table tr:hover {
-            background: #f1f1f1;
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        table td {
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table a {
+            display: inline-block;
+            padding: 7px 14px;
+            background-color: var(--success);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        table a:hover {
+            background-color: #27ae60;
         }
 
         /* Animations */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -193,7 +293,7 @@
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -201,73 +301,190 @@
             }
         }
 
-        @keyframes slideIn {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateX(-100px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
             }
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
+            #dashboard {
+                width: 240px;
+            }
+            
+            main {
+                margin-left: 240px;
+                width: calc(100% - 240px);
+                padding: 20px;
+            }
+            
             h1 {
                 font-size: 2em;
             }
+        }
 
-            h2 {
+        @media (max-width: 768px) {
+            #dashboard {
+                width: 220px;
+            }
+            
+            #dashboard img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            main {
+                margin-left: 220px;
+                width: calc(100% - 220px);
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            form {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .results {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #dashboard {
+                width: 60px;
+                overflow: hidden;
+            }
+            
+            #dashboard img, #dashboard h2 {
+                display: none;
+            }
+            
+            #dashboard ul li {
+                padding: 15px 5px;
+                justify-content: center;
+            }
+            
+            #dashboard ul li i {
+                margin: 0;
                 font-size: 1.5em;
             }
-
-            form {
-                width: 90%;
-            }
-
-            #dashboard {
-                width: 200px;
-            }
-
+            
             main {
-                margin-left: 210px;
-                width: calc(100% - 210px);
+                margin-left: 60px;
+                width: calc(100% - 60px);
             }
+            
+            table th, table td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Additional Enhancements */
+        .no-results {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            font-size: 1.1em;
+            color: var(--dark);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
         }
     </style>
 </head>
 <body>
     <div id="dashboard">
-        <img src="/static/Images/student.jpeg" alt="Student Logo">
-        <h2>Welcome, Student</h2>
+        <img src="/static/Images/student.jpeg" alt="Student Profile">
+        <h2>Student Portal</h2>
         <ul>
-            <li><i>📚</i> Courses</li>
-            <li><i>🏫</i> Branches</li>
-            <li><i>📑</i> Paper Types</li>
-            <li><i>📅</i> Years</li>
-            <li><i>🔓</i> Logout</li>
+            <li><i class="fas fa-book"></i> Courses</li>
+            <li><i class="fas fa-university"></i> Branches</li>
+            <li><i class="fas fa-file-alt"></i> Paper Types</li>
+            <li><i class="fas fa-calendar-alt"></i> Years</li>
+            <li><i class="fas fa-sign-out-alt"></i> Logout</li>
         </ul>
     </div>
     <main>
-        <h1>Search Papers</h1>
+        <h1>Academic Papers Repository</h1>
         <form method="POST">
             <label for="course">Course:</label>
-            <input type="text" name="course" id="course" placeholder="Enter course">
-
+            <select id="course" name="course" required>
+                <option value="">Select Course</option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="M.Tech">M.Tech</option>
+                <option value="BSc Ag.">BSc Ag.</option>
+                <option value="Nursing">Nursing</option>
+            </select>
+        
             <label for="branch">Branch:</label>
-            <input type="text" name="branch" id="branch" placeholder="Enter branch">
-
+            <select id="branch" name="branch" required>
+                <option value="">Select Branch</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="ME">ME</option>
+                <option value="Civil">Civil</option>
+            </select>
+        
             <label for="year">Year:</label>
-            <input type="text" name="year" id="year" placeholder="Enter year">
-
+            <select id="year" name="year" required>
+                <option value="">Select Year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
+        
             <label for="semester">Semester:</label>
-            <input type="text" name="semester" id="semester" placeholder="Enter semester">
-
+            <select id="semester" name="semester" required>
+                <option value="">Select Semester</option>
+                <option value="Semester-I">Semester-I</option>
+                <option value="Semester-II">Semester-II</option>
+                <option value="Semester-III">Semester-III</option>
+                <option value="Semester-IV">Semester-IV</option>
+                <option value="Semester-V">Semester-V</option>
+                <option value="Semester-VI">Semester-VI</option>
+                <option value="Semester-VII">Semester-VII</option>
+                <option value="Semester-VIII">Semester-VIII</option>
+            </select>
+        
             <label for="paper_type">Paper Type:</label>
-            <input type="text" name="paper_type" id="paper_type" placeholder="Enter paper type">
-
-            <button type="submit">Search</button>
+            <select id="paper_type" name="paper_type" required>
+                <option value="">Select Paper Type</option>
+                <option value="Previous Semester Paper">Previous Semester Paper</option>
+                <option value="Cycle Test Paper">Cycle Test Paper</option>
+                <option value="Class Test Paper">Class Test Paper</option>
+            </select>
+        
+            <button type="submit">
+                <i class="fas fa-search"></i> Search Papers
+            </button>
         </form>
 
         <div class="results">
@@ -294,15 +511,80 @@
                                 <td>{{ paper['semester'] }}</td>
                                 <td>{{ paper['subject'] }}</td>
                                 <td>{{ paper['paper_type'] }}</td>
-                                <td><a href="{{ url_for('static', filename='uploads/' + paper['filename']) }}" download>Download Paper</a></td>
+                                <td><a href="{{ url_for('static', filename='uploads/' + paper['filename']) }}" download><i class="fas fa-download"></i> Download</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             {% else %}
-                <p>No papers found based on the search criteria.</p>
+                <div class="no-results">
+                    <i class="fas fa-info-circle"></i> No papers found based on the search criteria.
+                </div>
             {% endif %}
         </div>
     </main>
+
+    <script>
+        // Add some subtle animations and interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Subtle hover effects for dashboard items
+            const dashboardItems = document.querySelectorAll('#dashboard ul li');
+            dashboardItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.transition = 'all 0.3s ease';
+                });
+            });
+
+            // Form validation enhancement
+            const form = document.querySelector('form');
+            const selects = document.querySelectorAll('select');
+            
+            form.addEventListener('submit', function(e) {
+                let valid = true;
+                
+                selects.forEach(select => {
+                    if (!select.value) {
+                        valid = false;
+                        select.style.borderColor = '#e74c3c';
+                    } else {
+                        select.style.borderColor = '#2ecc71';
+                    }
+                });
+                
+                if (!valid) {
+                    e.preventDefault();
+                    // Add a subtle shake animation to invalid fields
+                    selects.forEach(select => {
+                        if (!select.value) {
+                            select.style.animation = 'shake 0.5s ease';
+                            setTimeout(() => {
+                                select.style.animation = '';
+                            }, 500);
+                        }
+                    });
+                }
+            });
+            
+            // Clear validation styling on change
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    if (this.value) {
+                        this.style.borderColor = '#2ecc71';
+                    }
+                });
+            });
+        });
+
+        // Add shake animation for form validation
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+                    20%, 40%, 60%, 80% { transform: translateX(3px); }
+                }
+            </style>
+        `);
+    </script>
 </body>
 </html>
